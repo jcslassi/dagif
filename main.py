@@ -5,8 +5,9 @@ from bottle import route, run, request
 from giphypop  import Giphy
 import requests
 
-ITERATIONS = False
+ITERATIONS = False  # giphypop y u no generate?
 
+logging.basicConfig(filename='dagif.log', level=logging.INFO)
 giphy = Giphy()
 
 @route('/r', method=['POST', 'GET'])
@@ -18,7 +19,8 @@ def r():
 @route('/g', method=['POST'])
 def g():
     search = request.forms.get('text')[3:]
-    logging.info("Serving %s for user %s" % (search, request.forms.get('user_name'))
+    logging.info("Serving %s for user %s" % (search,
+        request.forms.get('user_name')))
     if ITERATIONS:
         iterations = 1
         if search.endswith('.'):
